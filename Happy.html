@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comfort Space</title>
+  <style>
+    :root{
+      --bg:#fff7f8;
+      --card:#ffffff;
+      --accent:#ff6b81;
+      --muted:#6b6b6b;
+      --glass: rgba(255,107,129,0.08);
+      --dark-bg:#181818;
+      --dark-card:#242424;
+      --dark-text:#f1f1f1;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,Roboto,Arial;
+      background:var(--bg);
+      color:#222;
+      padding:14px;
+      min-height:100vh;
+      transition:0.3s;
+    }
+    body.dark{
+      background:var(--dark-bg);
+      color:var(--dark-text);
+    }
+    .container{
+      max-width:880px;
+      margin:0 auto;
+    }
+    .header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:20px;
+    }
+    .logo{
+      width:58px;
+      height:58px;
+      border-radius:20px;
+      background:conic-gradient(from 200deg,var(--accent),#ffa6c9,#ffd4e1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      color:#fff;
+      box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px;
+      margin-bottom:16px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.05);
+      transition:0.3s;
+    }
+    body.dark .card{
+      background:var(--dark-card);
+      box-shadow:0 4px 14px rgba(255,255,255,0.04);
+    }
+    h2{margin-bottom:10px}
+
+    .button{
+      padding:10px 16px;
+      border-radius:12px;
+      border:none;
+      font-weight:600;
+      cursor:pointer;
+      background:var(--glass);
+      margin:4px 0;
+    }
+    .accent{ background:linear-gradient(90deg,var(--accent),#ff9fb3); color:#fff; }
+
+    /* Floating Button */
+    .float-btn{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      padding:14px 18px;
+      border-radius:50px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(255,107,129,0.4);
+      z-index:999;
+    }
+
+    /* Dark mode toggle */
+    .toggle{
+      cursor:pointer;
+      padding:8px 12px;
+      border-radius:8px;
+      background:var(--glass);
+      margin-left:auto;
+    }
+
+    /* Mobile-first adjustments */
+    @media(min-width:720px){
+      body{padding:30px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">❤</div>
+      <div>
+        <h2>For You</h2>
+        <div style="color:var(--muted)">A tiny comfort space just for your bad days.</div>
+      </div>
+      <div class="toggle" onclick="toggleDark()">🌓</div>
+    </div>
+
+    <div class="card">
+      <h3>Sweet Messages</h3>
+      <button class="button accent" onclick="copyText('Hey, rest well today. You deserve all the comfort. ❤')">Send Sweet Note</button>
+      <button class="button" onclick="copyText('Drink warm water, take it slow — you are stronger than it feels today. 🌸')">Care Tip</button>
+      <button class="button" onclick="copyText('Sending virtual chocolate 🍫 and a warm hug.')">Virtual Treat</button>
+    </div>
+
+    <div class="card">
+      <h3>Soft Poem</h3>
+      <p style="font-style:italic">“Breathe slow, rest deep —<br> your heart is stronger than the ache you keep.”</p>
+    </div>
+
+    <div class="card">
+      <h3>Music for Comfort</h3>
+      <audio controls style="width:100%">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f86d09c97.mp3?filename=soft-piano-ambient-110109.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <div class="float-btn" onclick="scrollToTop()">↑</div>
+
+  <script>
+    function copyText(t){navigator.clipboard.writeText(t); alert('Copied!');}
+    function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+    function toggleDark(){document.body.classList.toggle('dark')}
+  </script>
+  <div class="hearts"></div>
+  <style>
+    .hearts{
+      position:fixed;
+      left:0;top:0;
+      width:100%;height:100%;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+    .hearts::before,.hearts::after{
+      content:"❤";
+      position:absolute;
+      font-size:32px;
+      color:#ff6b9c;
+      animation:float 6s infinite ease-in-out;
+      opacity:0.7;
+    }
+    .hearts::before{ left:20%; animation-duration:7s; }
+    .hearts::after{ left:70%; animation-duration:5.5s; }
+
+    @keyframes float{
+      0%{ transform:translateY(120%); opacity:0; }
+      20%{ opacity:1; }
+      100%{ transform:translateY(-20%); opacity:0; }
+    }
+  </style>
+</body>
+</html>
